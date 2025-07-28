@@ -1,7 +1,7 @@
 import { ActivityIndicator, Image, Text, View } from "react-native";
 import "../global.css";
 import { MotiView, MotiText } from "moti";
-import ProgressBar from "@/components/UI/Progressbar";
+import ProgressBar from "@/components/UI/ProgressBar";
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
 
