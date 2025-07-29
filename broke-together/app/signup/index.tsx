@@ -1,15 +1,22 @@
+import HeroSection from "@/components/UI/signup/HeroSection";
 import "../../global.css";
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from "react";
+import { ScrollView, Text, View } from "react-native";
 
 function index() {
   return (
-    <View className='flex-1 items-center justify-center'>
-        <Text>
-            Hello
-        </Text>
-    </View>
-  )
+    <ScrollView className="flex-1 bg-white ">
+      {/*Header */}
+      <HeroSection/>
+      {/*SOcial button */}
+      {/*Divider */}
+      {/*Progress step */}
+      {/*Form field */}
+      {/*Continue Button */}
+      {/*Footer */}
+      <Text>Hello</Text>
+    </ScrollView>
+  );
 }
 
 export default index;
