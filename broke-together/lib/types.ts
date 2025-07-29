@@ -3,3 +3,8 @@ export type Herodata = {
     title: string;
     description: string;
 };
+
+export type SocialButton={
+    icon:"",
+    text:""
+}
