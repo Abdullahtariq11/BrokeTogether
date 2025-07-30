@@ -4,7 +4,7 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 function SocialButton() {
   return (
-    <View className="w-full flex-1 gap-1 pb-1 px-6 mt-6 space-y-4 items-center">
+    <View className="w-full flex-1 gap-2 pb-1 px-6 mt-6 space-y-4 items-center">
       <Text className="text-lg text-black font-semibold text-center">
         Create Your Account
       </Text>
