@@ -1,5 +1,7 @@
-import HeroSection from "@/components/UI/signup/HeroSection";
-import "../../global.css";
+import HeroSection from "@/components/UI/login/HeroSection";
+import SocialButton from "@/components/UI/signup/SocialButton";
+import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -8,22 +10,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import SocialButton from "@/components/UI/signup/SocialButton";
-import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
 
-function Signup() {
+function login() {
   const [isVisible, setIsVisible] = useState(false);
-  const [signupData, setSignupData] = useState({
-    fullName: "",
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
-  const handleChange = (field: keyof typeof signupData, value: string) => {
-    setSignupData((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (field: keyof typeof loginData, value: string) => {
+    setLoginData((prev) => ({ ...prev, [field]: value }));
   };
-
   return (
     <ScrollView className="flex-1 bg-white">
       {/* Header Section */}
@@ -43,19 +40,6 @@ function Signup() {
 
       {/* Form Container */}
       <View className="mx-6 mb-5 bg-white border border-gray-200 rounded-2xl shadow-md p-6 space-y-6">
-        {/* Full Name */}
-        <View>
-          <Text className="text-base font-medium text-gray-700 mb-1">
-            Full Name
-          </Text>
-          <TextInput
-            className="border bg-gray-100 border-gray-300 rounded-lg p-2 text-base"
-            placeholder="Enter your name"
-            value={signupData.fullName}
-            onChangeText={(value) => handleChange("fullName", value)}
-          />
-        </View>
-
         {/* Email */}
         <View>
           <Text className="text-base font-medium text-gray-700 mb-2">
@@ -66,7 +50,7 @@ function Signup() {
             placeholder="Enter your email"
             keyboardType="email-address"
             autoCapitalize="none"
-            value={signupData.email}
+            value={loginData.email}
             onChangeText={(value) => handleChange("email", value)}
           />
         </View>
@@ -79,7 +63,7 @@ function Signup() {
           <View className="flex-row items-center border bg-gray-100 border-gray-300 rounded-lg px-3">
             <TextInput
               placeholder="Enter your password"
-              value={signupData.password}
+              value={loginData.password}
               onChangeText={(value) => handleChange("password", value)}
               secureTextEntry={!isVisible}
               className="flex-1 p-2 text-base"
@@ -102,11 +86,11 @@ function Signup() {
         </TouchableOpacity>
         <View className="flex-row align-middle justify-center">
           <Text className="text-center text-gray-600">
-            Already have an account?{" "}
+            Don't have an account?{" "}
           </Text>
           <TouchableOpacity className=" mb-1">
-            <Link href={"/login"}>
-              <Text className="text-purple-600 font-semibold">Sign In</Text>
+            <Link href={"/signup"}>
+              <Text className="text-purple-600 font-semibold">Sign Up</Text>
             </Link>
           </TouchableOpacity>
         </View>
@@ -117,4 +101,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default login;
