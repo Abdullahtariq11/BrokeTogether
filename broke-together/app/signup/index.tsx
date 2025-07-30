@@ -95,22 +95,21 @@ function Signup() {
 
         {/* Continue Button */}
         <TouchableOpacity className="py-3 rounded-lg shadow-md">
-          <Text className="text-center text-black font-semibold text-lg">
+          <Text className="text-center py-3 text-black font-semibold text-md">
             Create Account
           </Text>
         </TouchableOpacity>
+        <View className="flex-row align-middle justify-center">
+          <Text className="text-center text-gray-600">
+            Already have an account?{" "}
+          </Text>
+          <TouchableOpacity className=" mb-1">
+            <Text className="text-purple-600 font-semibold">Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Footer */}
-
-      <View className="flex-row align-middle justify-center">
-        <Text className="text-center text-gray-600">
-          Already have an account?{" "}
-        </Text>
-        <TouchableOpacity className=" mb-1">
-          <Text className="text-purple-600 font-semibold">Sign In</Text>
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   );
 }
