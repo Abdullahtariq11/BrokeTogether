@@ -11,50 +11,55 @@ import {
 } from "react-native";
 import SocialButton from "@/components/UI/signup/SocialButton";
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
-// Define the type for our form data for better type safety
-type SignupDataType = {
-  fullName: string;
-  email: string;
-  password: string;
-};
+// --- VALIDATION IMPORTS START ---
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+// --- VALIDATION IMPORTS END ---
+
+// --- 1. DEFINE VALIDATION SCHEMA WITH ZOD ---
+const signupSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
+// Infer the type from the schema for type safety
+type SignupDataType = z.infer<typeof signupSchema>;
 
 function Signup() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [signupData, setSignupData] = useState<SignupDataType>({
-    fullName: "",
-    email: "",
-    password: "",
+  const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
+
+  // --- 2. SETUP REACT-HOOK-FORM ---
+  const {
+    control, // To connect inputs
+    handleSubmit, // To handle form submission
+    formState: { errors }, // To access validation errors
+  } = useForm<SignupDataType>({
+    resolver: zodResolver(signupSchema), // Use Zod for validation
   });
 
-
-  // State to manually track focus for the password input's container
-  const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
- 
-
-  const handleChange = (field: keyof SignupDataType, value: string) => {
-    setSignupData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleCreateAccount = () => {
+  // --- 3. CREATE THE SUBMISSION HANDLER ---
+  // This function only runs if validation is successful
+  const onSubmit = (data: SignupDataType) => {
     setIsLoading(true);
+    // Simulate an API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log("Creating account with:", signupData);
-    }, 2000);
+      console.log("Account created with validated data:", data);
+      // Navigate to the next step in the onboarding flow.
+      router.replace("/create-home");
+    }, 1500);
   };
 
   return (
-    <ScrollView className="flex-1 bg-white">
-      {/* Header Section */}
+    <ScrollView className="flex-1 bg-white" keyboardShouldPersistTaps="handled">
       <HeroSection />
-
-      {/* Social Login Buttons */}
       <SocialButton />
-
-      {/* Divider */}
       <View className="flex-row items-center my-8 mx-6">
         <View className="flex-1 h-px bg-gray-300" />
         <Text className="mx-3 text-gray-500 text-sm">
@@ -63,19 +68,34 @@ function Signup() {
         <View className="flex-1 h-px bg-gray-300" />
       </View>
 
-      {/* Form Container */}
-      <View className="mx-6 mb-5 bg-white border border-gray-200 rounded-2xl shadow-md p-6 space-y-6">
+      <View className="mx-6 mb-5 bg-white border border-gray-200 rounded-2xl shadow-md p-6 space-y-4">
         {/* Full Name */}
         <View>
           <Text className="text-base font-medium text-gray-700 mb-1">
             Full Name
           </Text>
-          <TextInput
-            className="border bg-gray-50 border-gray-300 rounded-lg p-3 text-base focus:border-green-500"
-            placeholder="Enter your name"
-            value={signupData.fullName}
-            onChangeText={(value) => handleChange("fullName", value)}
+          {/* --- 4. USE CONTROLLER FOR EACH INPUT --- */}
+          <Controller
+            control={control}
+            name="fullName"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                className={`border rounded-lg p-3 text-base ${
+                  errors.fullName
+                    ? "border-red-500"
+                    : "border-gray-300 bg-gray-50 focus:border-green-500"
+                }`}
+                placeholder="Enter your name"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
+          {/* --- 5. DISPLAY VALIDATION ERRORS --- */}
+          {errors.fullName && (
+            <Text className="text-red-500 mt-1">{errors.fullName.message}</Text>
+          )}
         </View>
 
         {/* Email */}
@@ -83,14 +103,28 @@ function Signup() {
           <Text className="text-base font-medium text-gray-700 mb-2">
             Email
           </Text>
-          <TextInput
-            className="border bg-gray-50 border-gray-300 rounded-lg p-3 text-base focus:border-green-500"
-            placeholder="Enter your email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={signupData.email}
-            onChangeText={(value) => handleChange("email", value)}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                className={`border rounded-lg p-3 text-base ${
+                  errors.email
+                    ? "border-red-500"
+                    : "border-gray-300 bg-gray-50 focus:border-green-500"
+                }`}
+                placeholder="Enter your email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
+          {errors.email && (
+            <Text className="text-red-500 mt-1">{errors.email.message}</Text>
+          )}
         </View>
 
         {/* Password */}
@@ -98,40 +132,50 @@ function Signup() {
           <Text className="text-base font-medium text-gray-700 mb-2">
             Password
           </Text>
-          {/* --- FIX START --- */}
-          {/* Conditionally apply border style based on focus state */}
-          <View
-            className={`flex-row items-center border bg-gray-50 rounded-lg px-3 ${
-              isPasswordFocused ? "border-green-500" : "border-gray-300"
-            }`}
-          >
-          {/* --- FIX END --- */}
-            <TextInput
-              placeholder="Enter your password"
-              value={signupData.password}
-              onChangeText={(value) => handleChange("password", value)}
-              secureTextEntry={!isVisible}
-              className="flex-1 py-3 text-base"
-              // --- FIX START ---
-              // Set the focus state for the container
-              onFocus={() => setIsPasswordFocused(true)}
-              onBlur={() => setIsPasswordFocused(false)}
-              // --- FIX END ---
-            />
-            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-              <Ionicons
-                name={isVisible ? "eye-off" : "eye"}
-                size={22}
-                color="gray"
-              />
-            </TouchableOpacity>
-          </View>
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <View
+                className={`flex-row items-center border rounded-lg px-3 ${
+                  errors.password
+                    ? "border-red-500"
+                    : isPasswordFocused
+                      ? "border-green-500"
+                      : "border-gray-300 bg-gray-50"
+                }`}
+              >
+                <TextInput
+                  placeholder="Enter your password"
+                  value={value}
+                  onChangeText={onChange}
+                  secureTextEntry={!isVisible}
+                  className="flex-1 py-3 text-base"
+                  onBlur={() => {
+                    onBlur();
+                    setIsPasswordFocused(false);
+                  }}
+                  onFocus={() => setIsPasswordFocused(true)}
+                />
+                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                  <Ionicons
+                    name={isVisible ? "eye-off" : "eye"}
+                    size={22}
+                    color="gray"
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+          {errors.password && (
+            <Text className="text-red-500 mt-1">{errors.password.message}</Text>
+          )}
         </View>
 
-        {/* Continue Button */}
+        {/* --- 6. USE HANDLESUBMIT FOR THE BUTTON --- */}
         <TouchableOpacity
-          onPress={handleCreateAccount}
-          className="mt-4 mb-1 py-3 rounded-lg shadow-md bg-[#E98074] flex-row justify-center items-center"
+          onPress={handleSubmit(onSubmit)}
+          className="py-3 mt-4 rounded-lg shadow-md bg-[#E98074] flex-row justify-center items-center"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -142,8 +186,8 @@ function Signup() {
             </Text>
           )}
         </TouchableOpacity>
-        
-        <View className="flex-row items-center justify-center">
+
+        <View className="flex-row items-center justify-center pt-2">
           <Text className="text-center text-gray-600">
             Already have an account?{" "}
           </Text>
