@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import {  useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
-function index() {
-    const router = useRouter();
+function HomeSetup() {
+  const router = useRouter();
   return (
     <View className="m-4 flex-1  justify-center">
       <View className="m-4 flex-row items-center justify-center">
@@ -16,7 +16,7 @@ function index() {
           <Text className="text-gray-500 text-md ">Let's get you set up.</Text>
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>router.push("/signup/create-home")}>
         <View className="flex-row items-center m-4 p-4 border-2 border-gray-200 rounded-2xl">
           <Ionicons
             name="add-circle-outline"
@@ -35,10 +35,15 @@ function index() {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>router.push("/signup/join-home")}>
         <View className="flex-row items-center m-4 p-4 border-2 border-gray-200 rounded-2xl">
-             <MaterialCommunityIcons name="account-multiple-plus-outline" size={28} color="#A3B18A" style={{ marginRight: 10 }} />
-         
+          <MaterialCommunityIcons
+            name="account-multiple-plus-outline"
+            size={28}
+            color="#A3B18A"
+            style={{ marginRight: 10 }}
+          />
+
           <View className="m-4 flex-1  justify-center">
             <Text className="text-gray-600 text-lg font-bold">
               Join an Existing Home
@@ -53,4 +58,4 @@ function index() {
   );
 }
 
-export default index;
+export default HomeSetup;

@@ -52,7 +52,7 @@ function Signup() {
       setIsLoading(false);
       console.log("Account created with validated data:", data);
       // Navigate to the next step in the onboarding flow.
-      router.replace("/create-home");
+      router.push("/signup/home-setup");
     }, 1500);
   };
 

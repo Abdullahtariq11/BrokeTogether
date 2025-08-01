@@ -13,7 +13,7 @@ export default function Index() {
 
   useEffect(()=>{
     const timer =setTimeout(() => {
-      router.replace("/signup");
+      router.replace("/signup/home-setup"); //change back to sigup
     }, 100);
     return ()=> clearTimeout(timer);
   },[]);
