@@ -35,7 +35,7 @@ function HomeSetup() {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>router.push("/signup/join-home")}>
         <View className="flex-row items-center m-4 p-4 border-2 border-gray-200 rounded-2xl">
           <MaterialCommunityIcons
             name="account-multiple-plus-outline"
