@@ -1,13 +1,14 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { router, useRouter } from "expo-router";
+import {  useRouter } from "expo-router";
 
 function index() {
+    const router = useRouter();
   return (
     <View className="m-4 flex-1  justify-center">
       <View className="m-4 flex-row items-center justify-center">
-        <TouchableOpacity onPress={() => router.back} className="">
+        <TouchableOpacity onPress={() => router.back()} className="">
           <Ionicons name="chevron-back" size={28} color="#333" />
         </TouchableOpacity>
         <View className="m-4 flex-1  justify-center">
