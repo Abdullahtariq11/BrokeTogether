@@ -26,8 +26,8 @@ export default function Dashboard() {
       <RecentTransaction />
 
       {/* Floating Add Button */}
-      <TouchableOpacity className="absolute bottom-20 right-8 bg-[#E98074] p-4 rounded-full shadow-lg">
-        <Ionicons name="add" size={28} color="#fff" />
+      <TouchableOpacity className="flex-row justify-end p-4 rounded-full">
+        <Ionicons name="add-circle" size={40} color="#E98074" />
       </TouchableOpacity>
     </View>
   );
