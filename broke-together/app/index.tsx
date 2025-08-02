@@ -12,8 +12,8 @@ export default function Index() {
 
   useEffect(()=>{
     const timer =setTimeout(() => {
-      router.replace("/signup"); //change back to sigup
-    }, 2000);
+      router.replace("/(app)/dashboard"); //change back to sigup
+    }, 20);
     return ()=> clearTimeout(timer);
   },[]);
   return (

@@ -1,7 +1,7 @@
 import HeroSection from "@/components/UI/login/HeroSection";
 import SocialButton from "@/components/UI/signup/SocialButton";
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -9,24 +9,49 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from "react-native";
 
-function login() {
+// --- VALIDATION IMPORTS ---
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// --- 1. Define Validation Schema ---
+const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+type LoginDataType = z.infer<typeof loginSchema>;
+
+function Login() {
   const [isVisible, setIsVisible] = useState(false);
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
+  // --- 2. Setup Form ---
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginDataType>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const handleChange = (field: keyof typeof loginData, value: string) => {
-    setLoginData((prev) => ({ ...prev, [field]: value }));
+  // --- 3. Submit Handler ---
+  const onSubmit = (data: LoginDataType) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log("Logged in with:", data);
+      router.replace("/dashboard"); // Redirect to dashboard after login
+    }, 1500);
   };
+
   return (
-    <ScrollView className="flex-1 bg-white">
+    <ScrollView className="flex-1 bg-white" keyboardShouldPersistTaps="handled">
       {/* Header Section */}
       <HeroSection />
-
-      {/* Social Login Buttons */}
       <SocialButton />
 
       {/* Divider */}
@@ -45,14 +70,28 @@ function login() {
           <Text className="text-base font-medium text-gray-700 mb-2">
             Email
           </Text>
-          <TextInput
-            className="border bg-gray-100 border-gray-300 rounded-lg p-2 text-base"
-            placeholder="Enter your email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={loginData.email}
-            onChangeText={(value) => handleChange("email", value)}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                className={`border rounded-lg p-3 text-base ${
+                  errors.email
+                    ? "border-red-500"
+                    : "border-gray-300 bg-gray-50 focus:border-green-500"
+                }`}
+                placeholder="Enter your email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
+          {errors.email && (
+            <Text className="text-red-500 mt-1">{errors.email.message}</Text>
+          )}
         </View>
 
         {/* Password */}
@@ -60,45 +99,75 @@ function login() {
           <Text className="text-base font-medium text-gray-700 mb-2">
             Password
           </Text>
-          <View className="flex-row items-center border bg-gray-100 border-gray-300 rounded-lg px-3">
-            <TextInput
-              placeholder="Enter your password"
-              value={loginData.password}
-              onChangeText={(value) => handleChange("password", value)}
-              secureTextEntry={!isVisible}
-              className="flex-1 p-2 text-base"
-            />
-            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
-              <Ionicons
-                name={isVisible ? "eye-off" : "eye"}
-                size={22}
-                color="gray"
-              />
-            </TouchableOpacity>
-          </View>
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <View
+                className={`flex-row items-center border rounded-lg px-3 ${
+                  errors.password
+                    ? "border-red-500"
+                    : isPasswordFocused
+                      ? "border-green-500"
+                      : "border-gray-300 bg-gray-50"
+                }`}
+              >
+                <TextInput
+                  placeholder="Enter your password"
+                  value={value}
+                  onChangeText={onChange}
+                  secureTextEntry={!isVisible}
+                  className="flex-1 py-3 text-base"
+                  onBlur={() => {
+                    onBlur();
+                    setIsPasswordFocused(false);
+                  }}
+                  onFocus={() => setIsPasswordFocused(true)}
+                />
+                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                  <Ionicons
+                    name={isVisible ? "eye-off" : "eye"}
+                    size={22}
+                    color="gray"
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+          {errors.password && (
+            <Text className="text-red-500 mt-1">{errors.password.message}</Text>
+          )}
         </View>
 
-        {/* Continue Button */}
-        <TouchableOpacity className="py-3 rounded-lg shadow-md">
-          <Text className="text-center py-3 text-black font-semibold text-md">
-            Create Account
-          </Text>
+        {/* Login Button */}
+        <TouchableOpacity
+          onPress={handleSubmit(onSubmit)}
+          className="py-3 mt-4 rounded-lg shadow-md bg-[#E98074] flex-row justify-center items-center"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <Text className="text-center text-white font-semibold text-md">
+              Log In
+            </Text>
+          )}
         </TouchableOpacity>
-        <View className="flex-row align-middle justify-center">
+
+        {/* Footer Link */}
+        <View className="flex-row items-center justify-center pt-2">
           <Text className="text-center text-gray-600">
             Don't have an account?{" "}
           </Text>
-          <TouchableOpacity className=" mb-1">
-            <Link href={"/signup"}>
-              <Text className="text-purple-600 font-semibold">Sign Up</Text>
-            </Link>
-          </TouchableOpacity>
+          <Link href={"/signup"} asChild>
+            <TouchableOpacity>
+              <Text className="text-green-600 font-semibold">Sign Up</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </View>
-
-      {/* Footer */}
     </ScrollView>
   );
 }
 
-export default login;
+export default Login;
