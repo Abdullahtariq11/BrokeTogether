@@ -1,33 +1,46 @@
 import ChippedCard from "@/components/UI/dashboard/chipped-card";
 import DashboardHeader from "@/components/UI/dashboard/dashboard-header";
 import RecentTransaction from "@/components/UI/dashboard/recent-transaction";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function Dashboard() {
   return (
     <View className="flex-1 bg-[#F8F9F6]">
-      {/* Header */}
       <DashboardHeader />
 
-      {/* Who's Chipped In Card */}
-      <ChippedCard />
+      <ScrollView
+        className="flex-1 bg-[#F8F9F6]"
+        contentContainerStyle={{ paddingBottom: 100 }}
+      >
+        <ChippedCard />
 
-      {/* Balance Button */}
-      <TouchableOpacity className="mx-4">
-        <View className="flex p-4 border border-[#A3B18A] rounded-xl justify-center items-center bg-[#A3B18A20]">
-          <Text className="text-lg font-semibold text-[#6B705C]">
-            $ Balance the Pot
-          </Text>
-        </View>
-      </TouchableOpacity>
+        {/* Balance the Pot - Full Width CTA */}
+        <TouchableOpacity className="mx-4 mt-2">
+          <View className="w-full py-4 rounded-xl bg-[#A3B18A]">
+            <Text className="text-lg font-semibold text-white text-center">
+              Balance the Pot
+            </Text>
+          </View>
+        </TouchableOpacity>
 
-      {/* Recent Transactions */}
-      <RecentTransaction />
+        <RecentTransaction />
+      </ScrollView>
 
       {/* Floating Add Button */}
-      <TouchableOpacity className="flex-row justify-end p-4 rounded-full">
-        <Ionicons name="add-circle" size={40} color="#E98074" />
+      <TouchableOpacity
+        className="absolute bottom-24 right-6 rounded-full shadow-lg"
+        style={{
+          backgroundColor: "#E98074",
+          padding: 14,
+          elevation: 6,
+          shadowColor: "#000",
+          shadowOpacity: 0.2,
+          shadowOffset: { width: 0, height: 3 },
+          shadowRadius: 6,
+        }}
+      >
+        <Ionicons name="add" size={28} color="#fff" />
       </TouchableOpacity>
     </View>
   );
