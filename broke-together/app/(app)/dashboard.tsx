@@ -3,8 +3,11 @@ import DashboardHeader from "@/components/UI/dashboard/dashboard-header";
 import RecentTransaction from "@/components/UI/dashboard/recent-transaction";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import ContributionModal from "@/components/UI/dashboard/add-contribution-modal";
 
 export default function Dashboard() {
+  const [isModalVisible,setModalVisible]=useState<boolean>(false);
   return (
     <View className="flex-1 bg-[#F8F9F6]">
       <DashboardHeader />
@@ -29,6 +32,7 @@ export default function Dashboard() {
 
       {/* Floating Add Button */}
       <TouchableOpacity
+      onPress={()=>setModalVisible(true)}
         className="absolute bottom-24 right-6 rounded-full shadow-lg"
         style={{
           backgroundColor: "#E98074",
@@ -42,6 +46,8 @@ export default function Dashboard() {
       >
         <Ionicons name="add" size={28} color="#fff" />
       </TouchableOpacity>
+
+      <ContributionModal visible={isModalVisible} onClose={() => setModalVisible(false)}/>
     </View>
   );
 }
