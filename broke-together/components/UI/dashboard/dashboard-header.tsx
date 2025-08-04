@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 function DashboardHeader() {
   return (
@@ -10,7 +11,7 @@ function DashboardHeader() {
         <Text className="text-gray-800 text-2xl font-extrabold">
           Elm Street
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>router.push("/(app)/settings")}>
           <Ionicons name="settings-outline" size={26} color="#555" />
         </TouchableOpacity>
       </View>
