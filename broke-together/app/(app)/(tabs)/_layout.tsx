@@ -17,7 +17,7 @@ export default function AppLayout() {
       }}
     >
       <Tabs.Screen
-        name="dashboard"
+        name="dashboard/index"
         options={{
           title: "The Pot",
 
@@ -27,7 +27,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="shopping-list"
+        name="shopping-list/index"
         options={{
           title: "Shopping List",
           tabBarIcon: ({ color, size }) => (
