@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "zL4mIOW7a5jnhRy8odTtS70qx5lvL1iD3C9KZnyFs+A=",
+  "Source": "BrokeTogether.API",
+  "BasePath": "_content/BrokeTogether.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
