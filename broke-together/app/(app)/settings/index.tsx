@@ -2,6 +2,7 @@ import About from "@/components/UI/setting/about";
 import HouseHold from "@/components/UI/setting/house-hold";
 import Profile from "@/components/UI/setting/profile";
 import SettingHeader from "@/components/UI/setting/setting-header";
+import { router } from "expo-router";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -26,7 +27,7 @@ function Settings() {
         <About />
 
         {/* Logout Button */}
-        <TouchableOpacity className="mt-6 bg-red-500 p-4 rounded-xl shadow-md">
+        <TouchableOpacity onPress={()=>router.replace("/login")} className="mt-6 bg-red-500 p-4 rounded-xl shadow-md">
           <Text className="text-center text-white font-semibold text-lg">
             Log Out
           </Text>
