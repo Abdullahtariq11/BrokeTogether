@@ -1,10 +1,10 @@
-# Harmony 🏡✨
+# Broke Together 🏡✨
 
-![Harmony Logo](https://placehold.co/600x300/A3B18A/FFFFFF?text=Harmony&font=poppins)
+![Broke Together Logo](https://placehold.co/600x300/A3B18A/FFFFFF?text=Broke+Together&font=poppins)
 
 **Share groceries and expenses, stress-free.**
 
-Harmony is a mobile app designed to eliminate the friction of managing a shared home. It reframes shared expenses from "debt" into "contributions," fostering household harmony through a collaborative and beautifully simple interface.
+Broke Together is a mobile app designed to eliminate the friction of managing a shared home. It reframes shared expenses from "debt" into "contributions," fostering household harmony through a collaborative and beautifully simple interface.
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -14,7 +14,7 @@ Harmony is a mobile app designed to eliminate the friction of managing a shared 
 
 ## The Vision: More Than Just a Ledger
 
-Existing expense-splitting apps feel like cold, transactional ledgers. They solve the math problem but ignore the human element. Harmony is different. Our core mission is to be a **collaborative household tool** that makes shared living easier, more transparent, and less awkward.
+Existing expense-splitting apps feel like cold, transactional ledgers. They solve the math problem but ignore the human element. Broke Together is different. Our core mission is to be a **collaborative household tool** that makes shared living easier, more transparent, and less awkward.
 
 We are not a "Splitwise killer"; we are a **household harmony tool**. We achieve this by focusing on a specific use case—roommates managing shared goods—and solving it perfectly.
 
@@ -28,7 +28,7 @@ We are not a "Splitwise killer"; we are a **household harmony tool**. We achieve
 
 ## 🎯 Target Audience
 
-Our primary user is the **"Urban Roommate"**: a tech-savvy young professional or student living in a shared apartment who wants to keep finances fair without the stress and awkwardness of constantly nagging for money.
+Our primary user is the **"Urban Roommate"**: a tech-savvy young professional or student living in a shared apartment who wants to keep finances fair without the stress and awkwardness of nagging for money.
 
 ## 🛠️ Technology Stack
 
@@ -62,15 +62,15 @@ Follow these instructions to get a copy of the project up and running on your lo
     dotnet restore
     ```
 3.  **Configure your database:**
-    * Open `appsettings.Development.json`.
+    * Open `backend/BrokeTogether.Api/appsettings.Development.json`.
     * Update the `DefaultConnection` connection string with your database credentials.
 4.  **Apply database migrations:**
     ```sh
-    dotnet ef database update
+    dotnet ef database update --project backend/BrokeTogether.Infrastructure
     ```
 5.  **Run the backend server:**
     ```sh
-    dotnet run
+    dotnet run --project backend/BrokeTogether.Api
     ```
     The API will be running at `https://localhost:7001` (or a similar port).
 
@@ -102,22 +102,23 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ## 📂 Project Structure
 
-This project is structured as a monorepo with separate directories for the frontend and backend.
+This project is structured as a monorepo using a Clean Architecture approach for the backend.
 
 
-harmony/
-├── backend/              # ASP.NET Core Web API project
-│   ├── Controllers/
-│   ├── Data/             # EF Core DbContext and Migrations
-│   ├── Models/           # Domain models and DTOs
-│   ├── Services/         # Business logic
-│   ├── appsettings.json
-│   └── Harmony.csproj
-├── frontend/             # React Native project
+BrokeTogether/
+├── backend/                              # .NET Solution Root
+│   ├── BrokeTogether.Api/                # ASP.NET Core Web API (Controllers, DI, Filters)
+│   ├── BrokeTogether.Application/        # Business logic (Services, DTOs, Validation)
+│   ├── BrokeTogether.Domain/             # Core business entities and contracts
+│   ├── BrokeTogether.Infrastructure/     # EF Core, Repositories, DbContext
+│   └── BrokeTogether.Tests/              # Unit and integration tests
+│
+├── frontend/                             # React Native project
 │   ├── android/
 │   ├── ios/
 │   └── src/
-└── harmony.sln           # Visual Studio Solution file
+│
+└── BrokeTogether.sln                     # Visual Studio Solution file
 
 
 ## 🤝 Contributing
