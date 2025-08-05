@@ -33,6 +33,54 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "BrokeTogether.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "BrokeTogether.Core": "1.0.0",
+          "BrokeTogether.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BrokeTogether.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BrokeTogether.Application.dll": {}
+        }
+      },
+      "BrokeTogether.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/BrokeTogether.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BrokeTogether.Core.dll": {}
+        }
+      },
+      "BrokeTogether.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "BrokeTogether.Core": "1.0.0",
+          "BrokeTogether.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BrokeTogether.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BrokeTogether.Infrastructure.dll": {}
+        }
+      },
+      "BrokeTogether.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/BrokeTogether.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BrokeTogether.Shared.dll": {}
+        }
       }
     }
   },
@@ -67,10 +115,32 @@
         "microsoft.openapi.1.6.17.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "BrokeTogether.Application/1.0.0": {
+      "type": "project",
+      "path": "../BrokeTogether.Application/BrokeTogether.Application.csproj",
+      "msbuildProject": "../BrokeTogether.Application/BrokeTogether.Application.csproj"
+    },
+    "BrokeTogether.Core/1.0.0": {
+      "type": "project",
+      "path": "../BrokeTogether.Core/BrokeTogether.Core.csproj",
+      "msbuildProject": "../BrokeTogether.Core/BrokeTogether.Core.csproj"
+    },
+    "BrokeTogether.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../BrokeTogether.Infrastructure/BrokeTogether.Infrastructure.csproj",
+      "msbuildProject": "../BrokeTogether.Infrastructure/BrokeTogether.Infrastructure.csproj"
+    },
+    "BrokeTogether.Shared/1.0.0": {
+      "type": "project",
+      "path": "../BrokeTogether.Shared/BrokeTogether.Shared.csproj",
+      "msbuildProject": "../BrokeTogether.Shared/BrokeTogether.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "BrokeTogether.Application >= 1.0.0",
+      "BrokeTogether.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.2"
     ]
   },
@@ -99,7 +169,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Application/BrokeTogether.Application.csproj": {
+              "projectPath": "/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Application/BrokeTogether.Application.csproj"
+            },
+            "/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Infrastructure/BrokeTogether.Infrastructure.csproj": {
+              "projectPath": "/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Infrastructure/BrokeTogether.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
