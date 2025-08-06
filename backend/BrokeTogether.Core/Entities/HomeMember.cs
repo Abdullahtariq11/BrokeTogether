@@ -7,7 +7,7 @@ using BrokeTogether.Core.Enums;
 
 namespace BrokeTogether.Core.Entities
 {
-    public class HomeMembers
+    public class HomeMember
     {
         public Guid Id { get; set; }
         public Role Role { get; set; }

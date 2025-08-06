@@ -16,7 +16,7 @@ namespace BrokeTogether.Core.Entities
         // --- Navigation Properties ---
 
     // A home has a collection of members.
-    public ICollection<HomeMembers> Members { get; set; } = new List<HomeMembers>();
+    public ICollection<HomeMember> Members { get; set; } = new List<HomeMember>();
 
     // A home has a history of all its contributions.
     public ICollection<Contribution> Contributions { get; set; } = new List<Contribution>();

@@ -15,7 +15,7 @@ namespace BrokeTogether.Core.Entities
 
         //Navigation Property
         // A user can be a member of many homes.
-        public ICollection<HomeMembers> HomeMemebership { get; set; } = new List<HomeMembers>();
+        public ICollection<HomeMember> HomeMemeberships { get; set; } = new List<HomeMember>();
         // A user can pay for many contributions.
         public ICollection<Contribution> ContributionsPaid { get; set; } = new List<Contribution>();
         // A user can be responsible for many individual splits.
