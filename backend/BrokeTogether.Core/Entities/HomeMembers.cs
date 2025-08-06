@@ -17,5 +17,10 @@ namespace BrokeTogether.Core.Entities
         [Required]
         public string? UserId { get; set; } //ForeignKey
 
+        // Navigation property back to the User
+        public User User { get; set; } = null!;
+        // Navigation property back to the Home
+        public Home Home { get; set; } = null!;
+
     }
 }
