@@ -16,12 +16,12 @@ namespace BrokeTogether.Core.Entities
         public Status status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         // Foreign key for the Home this item belongs to
-        public int HomeId { get; set; }
+        public Guid HomeId { get; set; }
         // Navigation property back to the Home
         public Home Home { get; set; } = null!;
 
         // Foreign key for the Contribution (nullable, as it's only set after purchase)
-        public int? ContributionId { get; set; }
+        public Guid? ContributionId { get; set; }
         // Navigation property to the Contribution
         public Contribution? Contribution { get; set; }
 

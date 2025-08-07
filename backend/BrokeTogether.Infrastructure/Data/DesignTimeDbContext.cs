@@ -25,10 +25,10 @@ namespace BrokeTogether.Infrastructure.Data
             //Build Iconfiguration object to access configuration
             var configuration = new ConfigurationBuilder()
             .SetBasePath(basePath)
-            .AddJsonFile(Path.Combine(basePath, "..", "BrokeTogether.API", "appsetting.json"))
+            .AddJsonFile(Path.Combine(basePath, "..", "BrokeTogether.API", "appsettings.json"))
             .Build();
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
-            .UseNpgsql(configuration.GetConnectionString("supaBaseConnectionString"));
+            .UseNpgsql(configuration.GetConnectionString("SupabaseConnection"));
             return new RepositoryContext(builder.Options);
 
         }
