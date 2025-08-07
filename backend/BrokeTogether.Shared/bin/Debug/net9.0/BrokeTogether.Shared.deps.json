@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "BrokeTogether.Shared/1.0.0": {
+        "runtime": {
+          "BrokeTogether.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BrokeTogether.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

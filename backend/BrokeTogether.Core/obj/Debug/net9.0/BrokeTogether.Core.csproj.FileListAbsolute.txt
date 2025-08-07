@@ -1,0 +1,13 @@
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/bin/Debug/net9.0/BrokeTogether.Core.deps.json
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/bin/Debug/net9.0/BrokeTogether.Core.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/bin/Debug/net9.0/BrokeTogether.Core.pdb
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.csproj.AssemblyReference.cache
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.AssemblyInfoInputs.cache
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.AssemblyInfo.cs
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.csproj.CoreCompileInputs.cache
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.sourcelink.json
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/refint/BrokeTogether.Core.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/BrokeTogether.Core.pdb
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.Core/obj/Debug/net9.0/ref/BrokeTogether.Core.dll

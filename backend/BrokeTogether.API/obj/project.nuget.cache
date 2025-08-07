@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "0jNyKnxP4R4=",
+  "dgSpecHash": "/F9sqBDIUhU=",
   "success": true,
   "projectFilePath": "/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/BrokeTogether.API.csproj",
   "expectedPackageFiles": [
     "/Users/abdullahtariq/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.aspnet.identity.core/2.2.4/microsoft.aspnet.identity.core.2.2.4.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.aspnetcore.cryptography.internal/9.0.8/microsoft.aspnetcore.cryptography.internal.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/9.0.8/microsoft.aspnetcore.cryptography.keyderivation.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/9.0.8/microsoft.aspnetcore.identity.entityframeworkcore.9.0.8.nupkg.sha512",
@@ -19,13 +20,19 @@
     "/Users/abdullahtariq/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.8/microsoft.entityframeworkcore.analyzers.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.8/microsoft.entityframeworkcore.relational.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.entityframeworkcore.sqlserver/9.0.8/microsoft.entityframeworkcore.sqlserver.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.entityframeworkcore.tools/9.0.8/microsoft.entityframeworkcore.tools.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.apidescription.server/9.0.0/microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.8/microsoft.extensions.caching.abstractions.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.caching.memory/9.0.8/microsoft.extensions.caching.memory.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.configuration/9.0.8/microsoft.extensions.configuration.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.8/microsoft.extensions.configuration.abstractions.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.configuration.fileextensions/9.0.8/microsoft.extensions.configuration.fileextensions.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.configuration.json/9.0.8/microsoft.extensions.configuration.json.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.8/microsoft.extensions.dependencyinjection.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.8/microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.fileproviders.abstractions/9.0.8/microsoft.extensions.fileproviders.abstractions.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.fileproviders.physical/9.0.8/microsoft.extensions.fileproviders.physical.9.0.8.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.filesystemglobbing/9.0.8/microsoft.extensions.filesystemglobbing.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.identity.core/9.0.8/microsoft.extensions.identity.core.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.identity.stores/9.0.8/microsoft.extensions.identity.stores.9.0.8.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.extensions.logging/9.0.8/microsoft.extensions.logging.9.0.8.nupkg.sha512",
@@ -45,6 +52,8 @@
     "/Users/abdullahtariq/.nuget/packages/microsoft.openapi/1.6.23/microsoft.openapi.1.6.23.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.sqlserver.server/1.0.0/microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/npgsql/9.0.3/npgsql.9.0.3.nupkg.sha512",
+    "/Users/abdullahtariq/.nuget/packages/npgsql.entityframeworkcore.postgresql/9.0.4/npgsql.entityframeworkcore.postgresql.9.0.4.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/swashbuckle.aspnetcore/9.0.3/swashbuckle.aspnetcore.9.0.3.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/swashbuckle.aspnetcore.swagger/9.0.3/swashbuckle.aspnetcore.swagger.9.0.3.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/swashbuckle.aspnetcore.swaggergen/9.0.3/swashbuckle.aspnetcore.swaggergen.9.0.3.nupkg.sha512",
@@ -73,5 +82,16 @@
     "/Users/abdullahtariq/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/abdullahtariq/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
