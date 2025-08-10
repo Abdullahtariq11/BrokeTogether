@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("04fb97e0-82b7-4ce6-9e4a-02d1beb56920")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrokeTogether.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+302d4277e30c9c40de37dbe9b1c095903e8c19b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+493cfcbda4f86e75deee872c1f16aa7a186b0077")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrokeTogether.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrokeTogether.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
