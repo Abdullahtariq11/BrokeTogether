@@ -8,12 +8,12 @@ namespace BrokeTogether.Core.Contracts
 {
     public interface IHomeRepository
     {
-        Task<Home?> GetByIdAsync(Guid id);
-        Task<IEnumerable<Home>> GetAllHomeForUser(string id);
+        Task<Home?> GetByIdAsync(Guid id, bool trackChanges);
+        Task<IEnumerable<Home>> GetAllHomeForUser(string id, bool trackChanges);
         Task CreateHomeAsync(Home home);
         Task UpdateHomeAsync(Home home);
         Task DeleteHomeAsync(Home home);
-        Task<Home?> GetHomeByInviteCodeAsync(string inviteCode);
+        Task<Home?> GetHomeByInviteCodeAsync(string inviteCode, bool trackChanges);
 
 
     }
