@@ -8,9 +8,9 @@ namespace BrokeTogether.Core.Contracts
 {
     public interface IContributionSplitRepository
     {
-        Task<ContributionSplit?> GetByIdsAsync(int contributionId, string userId); // Added method to get by composite key
-        Task<IEnumerable<ContributionSplit>> GetByContributionIdAsync(int contributionId);
-        Task<IEnumerable<ContributionSplit>> GetByUserIdAsync(string userId);
+        Task<ContributionSplit?> GetByIdsAsync(Guid contributionId, string userId,bool trackChanges); // Added method to get by composite key
+        Task<IEnumerable<ContributionSplit>> GetByContributionIdAsync(Guid contributionId,bool trackChanges);
+        Task<IEnumerable<ContributionSplit>> GetByUserIdAsync(string userId,bool trackChanges);
         Task AddRangeAsync(IEnumerable<ContributionSplit> splits); // Changed to AddRange for efficiency
         Task UpdateAsync(ContributionSplit split);
         Task DeleteAsync(ContributionSplit split);
