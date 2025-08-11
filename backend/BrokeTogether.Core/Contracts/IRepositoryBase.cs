@@ -11,8 +11,10 @@ namespace BrokeTogether.Core.Contracts
         IQueryable<T> FindAll(bool trackChanges);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
         Task CreateAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task CreateRangeAsync(IEnumerable<T> entities);
+        void UpdateRangeAsync(IEnumerable<T> entities);
+        void Update(T entity);
+        void Delete(T entity);
 
 
     }

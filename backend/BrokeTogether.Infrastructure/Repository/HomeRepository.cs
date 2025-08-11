@@ -20,30 +20,33 @@ namespace BrokeTogether.Infrastructure.Repository
             await CreateAsync(home);
         }
 
-        public async Task DeleteHomeAsync(Home home)
+        public Task DeleteHomeAsync(Home home)
         {
-            await DeleteAsync(home);
+            Delete(home);
+            return Task.CompletedTask;
+
         }
 
-        public async Task<IEnumerable<Home>> GetAllHomeForUser(string id, bool trackChanges)
+        public async Task<IEnumerable<Home>> GetAllHomeForUser(string id, bool trackChanges = false)
         {
             return await FindByCondition(h => h.Members.Any(m => m.UserId == id), trackChanges).ToListAsync();
 
         }
 
-        public async Task<Home?> GetByIdAsync(Guid id, bool trackChanges)
+        public async Task<Home?> GetByIdAsync(Guid id, bool trackChanges = false)
         {
             return await FindByCondition(h => h.Id == id, trackChanges).SingleOrDefaultAsync();
         }
 
-        public async Task<Home?> GetHomeByInviteCodeAsync(string inviteCode, bool trackChanges)
+        public async Task<Home?> GetHomeByInviteCodeAsync(string inviteCode, bool trackChanges = false)
         {
             return await FindByCondition(h => h.InviteCode == inviteCode, trackChanges).SingleOrDefaultAsync();
         }
 
-        public async Task UpdateHomeAsync(Home home)
+        public Task UpdateHomeAsync(Home home)
         {
-            await UpdateAsync(home);
+            Update(home);
+            return Task.CompletedTask;
         }
     }
 }

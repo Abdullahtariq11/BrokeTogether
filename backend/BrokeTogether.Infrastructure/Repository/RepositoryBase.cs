@@ -12,21 +12,28 @@ namespace BrokeTogether.Infrastructure.Repository
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
 
-        private readonly RepositoryContext _repositoryContext;
+        protected RepositoryContext _repositoryContext { get; }
         public RepositoryBase(RepositoryContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
+
+        
         public async Task CreateAsync(T entity)
         {
             await _repositoryContext.Set<T>().AddAsync(entity);
-
         }
 
-        public Task DeleteAsync(T entity)
+
+        public async Task CreateRangeAsync(IEnumerable<T> entities)
+        {
+            await _repositoryContext.Set<T>().AddRangeAsync(entities);
+        }
+
+        public void Delete(T entity)
         {
             _repositoryContext.Set<T>().Remove(entity);
-            return Task.CompletedTask;
+
         }
 
         public IQueryable<T> FindAll(bool trackChanges)
@@ -43,11 +50,15 @@ namespace BrokeTogether.Infrastructure.Repository
                 : _repositoryContext.Set<T>().Where(expression);
         }
 
-        public Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
             _repositoryContext.Set<T>().Update(entity);
-            return Task.CompletedTask;
+
         }
 
+        public void UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            _repositoryContext.Set<T>().UpdateRange(entities);
+        }
     }
 }
