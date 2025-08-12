@@ -11,6 +11,7 @@ namespace BrokeTogether.Core.Entities
         public Guid Id { get; set; }
         [Required(ErrorMessage = "House name is required")]
         public string? Name { get; set; }
+        [Required(ErrorMessage = "Invite code  is required")]
         public string? InviteCode { get; set; } //need to create algorithim for this
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         // --- Navigation Properties ---
