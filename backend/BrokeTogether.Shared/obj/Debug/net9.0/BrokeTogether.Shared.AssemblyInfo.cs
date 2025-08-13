@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrokeTogether.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+493cfcbda4f86e75deee872c1f16aa7a186b0077")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eafe4c5dcef4a0d75dc9ed386ca52d19e414e5bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrokeTogether.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrokeTogether.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
