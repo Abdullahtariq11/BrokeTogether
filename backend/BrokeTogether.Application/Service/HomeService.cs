@@ -29,46 +29,44 @@ namespace BrokeTogether.Application.Service
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Home name is required.", nameof(name));
 
-            // Ensure user exists (trackChanges: false since we don't modify the user here)
             var user = await _uow.UserRepository.GetByIdAsync(userId, trackChanges: false);
             if (user is null)
                 throw new InvalidOperationException($"User '{userId}' was not found.");
 
-            // Generate unique invite code
-            var code = await GenerateUniqueInviteCodeAsync();
+            // Ensure uniqueness beyond retry by having a unique index on InviteCode in the model.
+            var inviteCode = await GenerateUniqueInviteCodeAsync();
 
             var home = new Home
             {
                 Name = name.Trim(),
-                InviteCode = code
+                InviteCode = inviteCode
             };
 
             await _uow.HomeRepository.CreateHomeAsync(home);
 
-            // Add creator as Admin
-            var member = new HomeMember
+            // Creator is Admin by default
+            var adminMember = new HomeMember
             {
                 HomeId = home.Id,
                 UserId = userId,
                 Role = Role.Admin
             };
-            await _uow.HomeMemberRepository.AddMemberAsync(member);
+            await _uow.HomeMemberRepository.AddMemberAsync(adminMember);
 
             await _uow.SaveAsync();
 
-            _logger.LogInformation("Home '{HomeId}' created with invite code {Code}", home.Id, code);
+            _logger.LogInformation("Home {HomeId} created with invite code {Code}", home.Id, inviteCode);
             return home;
         }
 
         public async Task<Home?> GetHomeAsync(Guid homeId)
         {
             var home = await _uow.HomeRepository.GetByIdAsync(homeId, trackChanges: false);
-            return home; // return null if not found
+            return home;
         }
 
         public async Task<IEnumerable<Home>> GetHomesForUserAsync(string userId)
         {
-            // Returns empty sequence if user has no homes — not an error
             var homes = await _uow.HomeRepository.GetAllHomeForUser(userId, trackChanges: false);
             return homes;
         }
@@ -77,27 +75,30 @@ namespace BrokeTogether.Application.Service
         {
             var normalized = NormalizeInviteCode(code);
             var home = await _uow.HomeRepository.GetHomeByInviteCodeAsync(normalized, trackChanges: false);
-            return home; // return null if not found
+            return home;
         }
 
         public async Task<Home> JoinHomeByInviteCodeAsync(string userId, string code)
         {
             var normalized = NormalizeInviteCode(code);
 
-            // Ensure user exists (optional but recommended)
+            // Validate user exists (read-only)
             var user = await _uow.UserRepository.GetByIdAsync(userId, trackChanges: false);
             if (user is null)
                 throw new InvalidOperationException($"User '{userId}' was not found.");
 
-            // Fetch home (no need to track changes; we aren't modifying the Home entity)
+            // Fetch home (read-only; we aren't modifying the Home entity itself)
             var home = await _uow.HomeRepository.GetHomeByInviteCodeAsync(normalized, trackChanges: false);
             if (home is null)
                 throw new InvalidOperationException($"Invite code '{normalized}' is invalid.");
 
-            // Idempotent: if already a member, just return the home
+            // Idempotent: if already a member, no-op
             if (await _uow.HomeMemberRepository.IsUserInHomeAsync(userId, home.Id))
             {
-                _logger.LogInformation("User {UserId} attempted to join home {HomeId} again via code {Code}. No-op.", userId, home.Id, normalized);
+                _logger.LogInformation(
+                    "User {UserId} attempted to join home {HomeId} again via code {Code}. No-op.",
+                    userId, home.Id, normalized
+                );
                 return home;
             }
 
@@ -116,7 +117,7 @@ namespace BrokeTogether.Application.Service
             return home;
         }
 
-        // -------- Private helpers --------
+        // ---------- Helpers ----------
 
         private static string NormalizeInviteCode(string code)
         {
@@ -128,7 +129,6 @@ namespace BrokeTogether.Application.Service
 
         private async Task<string> GenerateUniqueInviteCodeAsync()
         {
-            // Ensure you also have a unique index on Homes.InviteCode at the EF/model level
             string code;
             do
             {

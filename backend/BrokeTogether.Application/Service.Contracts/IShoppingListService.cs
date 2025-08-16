@@ -71,5 +71,5 @@ namespace BrokeTogether.Application.Service.Contracts
     /// <summary>
     /// Result of linking items to a contribution.
     /// </summary>
-    public record LinkItemsResult(Contribution Contribution, IReadOnlyCollection<Guid> LinkedItemIds);
+    public record LinkItemsResult(Contribution? Contribution, IReadOnlyCollection<Guid> LinkedItemIds);
 }
