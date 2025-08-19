@@ -100,3 +100,10 @@
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/BrokeTogether.Infrastructure.pdb
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/BrokeTogether.Core.pdb
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/BrokeTogether.Shared.pdb
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.Configuration.FileExtensions.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Json.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.FileProviders.Physical.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Npgsql.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
