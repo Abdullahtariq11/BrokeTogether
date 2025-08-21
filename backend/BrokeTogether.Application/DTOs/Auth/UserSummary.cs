@@ -1,0 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BrokeTogether.Application.DTOs.Auth
+{
+    public record UserSummary(
+        string id,
+        string email,
+        string? fullName
+    );
+}
