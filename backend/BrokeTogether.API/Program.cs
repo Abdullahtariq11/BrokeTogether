@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigurePosgresContext(builder.Configuration);
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.BindJwt(builder.Configuration);
+builder.Services.ConfigureJwt(builder.Configuration);
+builder.Services.AddAuthentication();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -21,6 +24,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.UseAuthorization();
 

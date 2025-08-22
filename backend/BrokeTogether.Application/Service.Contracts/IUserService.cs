@@ -32,18 +32,10 @@ namespace BrokeTogether.Application.Service.Contracts
         Task<IEnumerable<User>> GetUsersByHomeIdAsync(Guid homeId);
 
         /// <summary>
-        /// Creates a new user in the system.
-        /// </summary>
-        Task<User> CreateUserAsync(User user);
-
-        /// <summary>
         /// Updates an existing user's details.
         /// </summary>
         Task<User?> UpdateUserAsync(User user);
 
-        /// <summary>
-        /// Deletes a user from the system.
-        /// </summary>
-        Task DeleteUserAsync(string userId);
+
     }
 }
