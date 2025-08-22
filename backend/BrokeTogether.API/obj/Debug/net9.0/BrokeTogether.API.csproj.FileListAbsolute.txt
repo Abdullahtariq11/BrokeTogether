@@ -107,3 +107,6 @@
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Npgsql.dll
 /Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Binder.dll
+/Users/abdullahtariq/Documents/GitHub/BrokeTogether/backend/BrokeTogether.API/bin/Debug/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll

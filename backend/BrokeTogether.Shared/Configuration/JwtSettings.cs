@@ -1,4 +1,4 @@
-namespace BrokeTogether.API.Configuration
+namespace BrokeTogether.Shared.Configuration
 {
     public sealed class JwtSettings
     {
