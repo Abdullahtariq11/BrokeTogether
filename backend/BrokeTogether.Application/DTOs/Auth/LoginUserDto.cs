@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace BrokeTogether.Application.DTOs.Auth
 {
-    public record LoginUserDto(string email, string password);
+    public record LoginUserDto(string Email, string Password);
 }

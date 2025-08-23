@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 namespace BrokeTogether.Application.DTOs.Auth
 {
     public record RefreshTokenRequest(
-        string refreshToken
+        string RefreshToken
     );
 }

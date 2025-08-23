@@ -1,24 +1,24 @@
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Concurrent;
 using BrokeTogether.Application.Service.Contracts;
 using BrokeTogether.Core.Entities;
 using BrokeTogether.Shared.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
 
 namespace BrokeTogether.Application.Service
 {
     public class TokenService : ITokenService
     {
-
         private readonly JwtSettings _jwtSettings;
-        private SymmetricSecurityKey _securityKey;
+        private readonly SymmetricSecurityKey _securityKey;
+
+        // MVP in-memory store (thread-safe). Replace with persistent store later.
+        private static readonly ConcurrentDictionary<string, (string token, DateTime expires)> _refreshStore
+            = new ConcurrentDictionary<string, (string token, DateTime expires)>();
 
         public TokenService(IOptions<JwtSettings> jwtOptions)
         {
@@ -26,47 +26,72 @@ namespace BrokeTogether.Application.Service
             _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SigningKey));
         }
 
-
         public Task<(string accessToken, DateTime expiresAt)> CreateAccessTokenAsync(User user, IEnumerable<Claim> extraClaims)
         {
             var now = DateTime.UtcNow;
             var expiresAt = now.AddMinutes(_jwtSettings.AccessTokenMinutes);
-            //set claims
-            var authClaims = new List<Claim>
+
+            var claims = new List<Claim>
             {
-                new (JwtRegisteredClaimNames.Sub,user.Id),
-                    new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new(ClaimTypes.NameIdentifier, user.Id),
-                new("typ", "access")
+                new (JwtRegisteredClaimNames.Sub, user.Id),
+                new (JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+                new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+                new (ClaimTypes.NameIdentifier, user.Id),
+                new ("typ", "access")
             };
-            if (extraClaims != null)
-                authClaims.AddRange(extraClaims);
+
+            if (extraClaims is not null)
+                claims.AddRange(extraClaims);
+
+            var creds = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
-                claims: authClaims,
+                claims: claims,
                 notBefore: now,
                 expires: expiresAt,
-                signingCredentials: new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256)
+                signingCredentials: creds
             );
-            return Task.FromResult((new JwtSecurityTokenHandler().WriteToken(token), expiresAt));
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return Task.FromResult((jwt, expiresAt));
         }
 
         public Task<(string refreshToken, DateTime expiresAt)> CreateRefreshTokenAsync(User user)
         {
-            throw new NotImplementedException();
+            var bytes = RandomNumberGenerator.GetBytes(64);
+            var token = Convert.ToBase64String(bytes);
+            var expiresAt = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenDays);
+
+            _refreshStore[user.Id] = (token, expiresAt);
+            return Task.FromResult((token, expiresAt));
         }
 
         public Task<bool> RevokeRefreshTokensAsync(string userId)
         {
-            throw new NotImplementedException();
+            var removed = _refreshStore.TryRemove(userId, out _);
+            return Task.FromResult(removed);
         }
 
         public Task<(bool isValid, string? userId, IEnumerable<Claim>? claims, string? error)> ValidateRefreshTokenAsync(string refreshToken)
         {
-            throw new NotImplementedException();
+            // MVP: reverse-lookup by value (O(n)); replace with persistent store per user/device later
+            foreach (var kvp in _refreshStore)
+            {
+                var userId = kvp.Key;
+                var (stored, exp) = kvp.Value;
+
+                if (string.Equals(stored, refreshToken, StringComparison.Ordinal))
+                {
+                    if (DateTime.UtcNow >= exp)
+                        return Task.FromResult((false, (string?)null, (IEnumerable<Claim>?)null, "Refresh token expired."));
+
+                    return Task.FromResult((true, userId, (IEnumerable<Claim>?)null, (string?)null));
+                }
+            }
+
+            return Task.FromResult((false, (string?)null, (IEnumerable<Claim>?)null, "Refresh token not found."));
         }
     }
 }
