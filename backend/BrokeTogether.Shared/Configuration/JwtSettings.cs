@@ -1,4 +1,4 @@
-namespace BrokeTogether.API.Configuration
+namespace BrokeTogether.Shared.Configuration
 {
     public sealed class JwtSettings
     {
@@ -6,5 +6,6 @@ namespace BrokeTogether.API.Configuration
         public string Audience { get; init; } = default!;
         public string SigningKey { get; init; } = default!;
         public int AccessTokenMinutes { get; init; } = 60;
+        public int RefreshTokenDays { get; init; } = 30;
     }
 }
