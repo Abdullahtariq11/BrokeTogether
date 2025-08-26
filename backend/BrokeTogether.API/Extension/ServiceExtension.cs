@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using BrokeTogether.Application.Service;
 using BrokeTogether.Application.Service.Contracts;
+using BrokeTogether.Core.Entities;
 using BrokeTogether.Infrastructure.Data;
 using BrokeTogether.Shared.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,6 +38,28 @@ namespace BrokeTogether.API.Extension
                     "JwtSettings:SigningKey is required and should be at least 32 chars.")
             .Validate(s => s.AccessTokenMinutes > 0, "JwtSettings:AccessTokenMinutes must be > 0.")
             .ValidateOnStart();
+        }
+        public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
+        {
+            services
+                .AddIdentityCore<User>(options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireDigit = false;
+                })
+                .AddRoles<IdentityRole>()                             // optional (keep if you’ll use roles)
+                .AddEntityFrameworkStores<RepositoryContext>()        // <-- connects Identity to your DbContext
+                .AddSignInManager<SignInManager<User>>()              // <-- needed for AuthService
+                .AddUserManager<UserManager<User>>()                  // <-- explicit, for clarity
+                .AddDefaultTokenProviders();
+
+            services.AddAuthorization();
+            services.AddHttpContextAccessor(); // good to have for Identity scenarios
+            return services;
         }
 
         public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
