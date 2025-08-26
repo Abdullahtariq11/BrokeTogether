@@ -7,12 +7,13 @@ namespace BrokeTogether.Application.Service.Contracts
 {
     public interface IServiceManager
     {
-        public IContributionService ContributionService { get; }
-        public IContributionSplitService ContributionSplitService { get; }
-        public IHomeMemberService HomeMemberService { get; }
-        public IHomeService HomeService { get; }
-        public IShoppingListService ShoppingListService { get; }
-        public IUserService UserService { get; }
+        IAuthService Auth { get; }
+        IHomeService Homes { get; }
+        IHomeMemberService HomeMembers { get; }
+        IShoppingListService ShoppingList { get; }
+        IContributionService Contributions { get; }
+        IContributionSplitService ContributionSplits { get; }
+        IUserService Users { get; } // keep for later (can be a thin wrapper over Identity)
 
     }
 }

@@ -16,6 +16,7 @@ builder.Services.BindJwt(builder.Configuration);
 builder.Services.ConfigureJwt(builder.Configuration);
 builder.Services.AddAuthentication();
 builder.Services.AddControllers();
+builder.Services.CongigureServiceManager();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

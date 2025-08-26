@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using BrokeTogether.Application.Service;
+using BrokeTogether.Application.Service.Contracts;
 using BrokeTogether.Infrastructure.Data;
 using BrokeTogether.Shared.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -66,5 +68,20 @@ namespace BrokeTogether.API.Extension
             );
         }
 
+        public static IServiceCollection CongigureServiceManager(this IServiceCollection services)
+        {
+            // Register concrete services first
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IHomeMemberService, HomeMemberService>();
+            services.AddScoped<IShoppingListService, ShoppingListService>();
+            services.AddScoped<IContributionService, ContributionService>();
+            services.AddScoped<IContributionSplitService, ContributionSplitService>();
+            services.AddScoped<IUserService, UserService>(); // can be a thin wrapper / placeholder
+
+            // Aggregate
+            services.AddScoped<IServiceManager, ServiceManager>();
+            return services;
+        }
     }
 }
