@@ -65,11 +65,12 @@ namespace BrokeTogether.API.Controllers
             var userDetails = await _userService.GetUserDetailByIdAsync(userId!);
             return Ok(userDetails);
         }
-       /* Implement later [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
+        /* Implement later [HttpPost("logout")]
+         public async Task<IActionResult> Logout()
+         {
 
-        }*/
+         }*/
+        //later implement
 
 
     }
