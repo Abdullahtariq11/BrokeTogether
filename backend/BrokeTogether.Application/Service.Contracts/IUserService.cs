@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BrokeTogether.Application.DTOs.Auth;
 using BrokeTogether.Core.Entities;
 
 namespace BrokeTogether.Application.Service.Contracts
@@ -14,7 +15,7 @@ namespace BrokeTogether.Application.Service.Contracts
         /// <summary>
         /// Gets a user by their unique identifier.
         /// </summary>
-        Task<User?> GetByIdAsync(string userId);
+        Task<UserSummary?> GetUserDetailByIdAsync(string userId);
 
         /// <summary>
         /// Gets a user by their email address.
