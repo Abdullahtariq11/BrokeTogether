@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BrokeTogether.Application.DTOs.Home;
 using BrokeTogether.Application.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,21 +21,28 @@ namespace BrokeTogether.API.Controllers
             _services = serviceManager;
         }
 
-        private string RequiredUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new Exception("Missing user id claim.");
+        private string RequireUserId() => User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new Exception("Missing user id claim.");
 
-        [HttpPost("/create")]
+        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreateHome([FromBody] string name)
+        public async Task<IActionResult> Create([FromBody] string name)
         {
-            string userId = RequiredUserId();
-            if (string.IsNullOrWhiteSpace(userId))
-                return Unauthorized();
-            var result = await _services.Homes.CreateHomeAsync(userId, name);
-            if (result is null)
-                return BadRequest("No home exists");
+            var userId = RequireUserId();
+            var home = await _services.Homes.CreateHomeAsync(userId, name);
 
-            return CreatedAtAction(nameof(CreateHome),nameof(result));
+            var dto = new HomeDto(home.Id, home.Name, home.InviteCode);
 
+            // Return 201 + Location header pointing to GetById
+            return CreatedAtAction(nameof(GetById), new { homeId = home.Id }, dto);
+        }
+
+        [HttpGet("{homeId:guid}")]
+        [Authorize]
+        public async Task<IActionResult> GetById(Guid homeId)
+        {
+            var home = await _services.Homes.GetHomeAsync(homeId);
+            if (home == null) return NotFound();
+            return Ok(new HomeDto(home.Id, home.Name, home.InviteCode));
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrokeTogether.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+baf3483a69875f4cc559e855001cd073822a0dea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3003eae89830a926153e7a89a153e8f7d60e2f35")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrokeTogether.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrokeTogether.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
