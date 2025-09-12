@@ -19,6 +19,17 @@ builder.Services.CongigureServiceManager();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
+// Add services to the container
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddSwaggerGen(c =>
 {
     // Optional: show XML comments if you want method/summary docs
@@ -61,6 +72,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 // Swagger in all environments (handy during MVP)
+// Enable CORS early in the middleware pipeline
+app.UseCors("AllowAll");
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
